@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y maven
 WORKDIR /app
 COPY . .
 
-RUN mvn clean install -DskipTests
+RUN mvn clean package -DskipTests
 
 EXPOSE 8080
 
