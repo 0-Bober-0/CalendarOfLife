@@ -1,10 +1,10 @@
-package com.calendar.server;
+package com.calendar.telegrambot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ServerApplicationTests {
+class TelegramBotApplicationTests {
 
 	@Test
 	void contextLoads() {

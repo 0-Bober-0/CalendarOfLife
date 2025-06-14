@@ -80,6 +80,15 @@ services:
       SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
       SPRING_JPA_PROPERTIES_HIBERNATE_SHOW_SQL: true
 
+  parser:
+    build:
+      context: ./TelegramBot
+    ports:
+      - "8082:8081"
+    restart: "always"
+    networks:
+      - kafka-net
+
   adminer:
     image: adminer
     container_name: adminer
