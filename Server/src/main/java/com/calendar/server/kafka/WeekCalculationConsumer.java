@@ -13,7 +13,7 @@ import java.time.temporal.ChronoUnit;
 @Service
 @RequiredArgsConstructor
 public class WeekCalculationConsumer {
-    private final KafkaTemplate<String, WeekCalculationResult> resultTemplate;
+    private final ResultProducer resultProducer;
 
     @KafkaListener(topics = "${kafka.topic.user-data}", groupId = "week-calculation-group")
     public void calculateWeeks(User user) {
@@ -22,10 +22,6 @@ public class WeekCalculationConsumer {
             LocalDate.now()
         );
 
-        WeekCalculationResult result = new WeekCalculationResult(
-            user.getChat_id(),
-            weeks
-        );
-        resultTemplate.send("week-calculation-results", result);
+        resultProducer.sendResult(user.getChat_id(), weeks);
     }
 }
