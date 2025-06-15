@@ -18,6 +18,6 @@ public class UserDataProducer {
     }
 
     public void sendUserData(User user) {
-        kafkaTemplate.send(topic, user.getChatId().toString(), user);
+        kafkaTemplate.send(topic, user.getChat_id().toString(), user);
     }
 }

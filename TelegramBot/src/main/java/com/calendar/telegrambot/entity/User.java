@@ -10,10 +10,10 @@ import java.time.LocalDate;
 public class User {
     private int id;
 
-    private Long chatId;
+    private Long chat_id;
 
     @Size(min=2, max=50, message="Имя должно быть от 2 до 50 символов")
     private String name;
 
-    private LocalDate date_of_birth;
+    private LocalDate birth_date;
 }

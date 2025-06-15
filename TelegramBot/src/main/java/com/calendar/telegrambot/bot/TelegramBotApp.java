@@ -35,7 +35,7 @@ public class TelegramBotApp extends MultiSessionTelegramBot {
         public UserSession(Long chatId) {
             this.state = RegistrationState.START;
             this.user = new User();
-            this.user.setChatId(chatId);
+            this.user.setChat_id(chatId);
         }
     }
 
@@ -70,7 +70,7 @@ public class TelegramBotApp extends MultiSessionTelegramBot {
                     break;
                 case COMPLETED:
                     sendTextMessage(chatId, "Регистрация уже завершена. Ваши данные: " +
-                            session.user.getName() + ", " + session.user.getDate_of_birth());
+                            session.user.getName() + ", " + session.user.getBirth_date());
                     break;
             }
         } catch (Exception e) {
@@ -104,9 +104,8 @@ public class TelegramBotApp extends MultiSessionTelegramBot {
             LocalDate birthDate = LocalDate.parse(dateStr, dateFormatter);
             validateBirthDate(birthDate);
 
-            session.user.setDate_of_birth(birthDate);
+            session.user.setBirth_date(birthDate);
 
-            // Отправка данных через Kafka
             userDataProducer.sendUserData(session.user);
 
             sendTextMessage(chatId, "Спасибо! Ваши данные успешно сохранены.");
