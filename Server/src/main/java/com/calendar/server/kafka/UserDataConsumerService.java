@@ -2,21 +2,21 @@ package com.calendar.server.kafka;
 
 import com.calendar.server.entity.User;
 import com.calendar.server.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class UserDataConsumerService {
     private final UserRepository userRepository;
+    private final ResultProducer resultProducer;
 
-    public UserDataConsumerService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @KafkaListener(
             topics = "${kafka.topic.user-data}",
@@ -38,5 +38,10 @@ public class UserDataConsumerService {
                             userRepository.save(newUser);
                         }
                 );
+        long weeks = ChronoUnit.WEEKS.between(
+            user.getBirth_date(),
+            LocalDate.now()
+        );
+        resultProducer.sendResult(user.getChat_id(), weeks);
     }
 }
