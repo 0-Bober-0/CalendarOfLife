@@ -23,6 +23,7 @@ public class UserDataConsumerService {
             containerFactory = "userKafkaListenerContainerFactory"
     )
     public void consumeUserData(User user) {
+        System.out.println("reijftrgjt9rtjgrtjgjrti8jt9jrtjgt98j" + user.toString());
         userRepository.findByChatId(user.getChat_id())
                 .ifPresentOrElse(
                         existingUser -> {

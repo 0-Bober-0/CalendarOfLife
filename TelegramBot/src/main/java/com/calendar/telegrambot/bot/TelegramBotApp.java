@@ -1,9 +1,11 @@
 package com.calendar.telegrambot.bot;
 
 import com.calendar.telegrambot.config.MultiSessionTelegramBot;
+import com.calendar.telegrambot.dto.WeekCalculationResult;
 import com.calendar.telegrambot.entity.User;
 import com.calendar.telegrambot.service.UserDataProducer;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -118,8 +120,12 @@ public class TelegramBotApp extends MultiSessionTelegramBot {
         }
     }
 
-    private void sendMessgaeAbout() {
-
+    @KafkaListener(
+            topics = "week-calculation-results",
+            containerFactory = "userKafkaListenerContainerFactory"
+    )
+    public void sendMessageAbout(WeekCalculationResult result) {
+        sendTextMessage(result.getChatId(), "Ты прожил(a): " + result.getWeeksLived() + " недель");
     }
 
     private void validateBirthDate(LocalDate date) throws IllegalArgumentException {

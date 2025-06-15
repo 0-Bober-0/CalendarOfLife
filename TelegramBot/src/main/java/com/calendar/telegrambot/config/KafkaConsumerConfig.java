@@ -1,5 +1,6 @@
 package com.calendar.telegrambot.config;
 
+import com.calendar.telegrambot.dto.WeekCalculationResult;
 import com.calendar.telegrambot.entity.User;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -21,7 +22,7 @@ public class KafkaConsumerConfig {
     private String bootstrapServers;
 
     @Bean
-    public ConsumerFactory<String, User> userConsumerFactory() {
+    public ConsumerFactory<String, WeekCalculationResult> userConsumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "telegram-bot-group");
@@ -30,13 +31,13 @@ public class KafkaConsumerConfig {
         return new DefaultKafkaConsumerFactory<>(
                 props,
                 new StringDeserializer(),
-                new JsonDeserializer<>(User.class, false)
+                new JsonDeserializer<>(WeekCalculationResult.class, false)
         );
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, User> userKafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, User> factory =
+    public ConcurrentKafkaListenerContainerFactory<String, WeekCalculationResult> userKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, WeekCalculationResult> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(userConsumerFactory());
         return factory;
