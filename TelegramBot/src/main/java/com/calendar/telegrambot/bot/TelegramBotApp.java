@@ -118,6 +118,10 @@ public class TelegramBotApp extends MultiSessionTelegramBot {
         }
     }
 
+    private void sendMessgaeAbout() {
+
+    }
+
     private void validateBirthDate(LocalDate date) throws IllegalArgumentException {
         if (date.isAfter(LocalDate.now())) {
             throw new IllegalArgumentException("Дата рождения не может быть в будущем");
