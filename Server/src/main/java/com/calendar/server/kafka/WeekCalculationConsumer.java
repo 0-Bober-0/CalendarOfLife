@@ -12,7 +12,7 @@ import java.time.temporal.ChronoUnit;
 
 @Service
 @RequiredArgsConstructor
-public class UserDataConsumer {
+public class WeekCalculationConsumer {
     private final KafkaTemplate<String, WeekCalculationResult> resultTemplate;
 
     @KafkaListener(topics = "${kafka.topic.user-data}", groupId = "week-calculation-group")
