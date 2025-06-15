@@ -1,10 +1,8 @@
 package com.calendar.server.kafka;
 
-import com.calendar.server.dto.WeekCalculationResult;
 import com.calendar.server.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
