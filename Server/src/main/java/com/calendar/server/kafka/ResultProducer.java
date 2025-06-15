@@ -12,6 +12,6 @@ public class ResultProducer {
 
     public void sendResult(Long chatId, long weeks) {
         WeekCalculationResult result = new WeekCalculationResult(chatId, weeks);
-        kafkaTemplate.send("week-calculation-results", chatId.toString(), result);
+        kafkaTemplate.send("week-calculation-results", result);
     }
 }
