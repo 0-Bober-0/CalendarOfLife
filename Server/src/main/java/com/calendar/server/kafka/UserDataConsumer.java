@@ -1,14 +1,13 @@
 package com.calendar.server.kafka;
 
 import com.calendar.server.dto.WeekCalculationResult;
+import com.calendar.server.entity.User;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 @Service
@@ -25,9 +24,7 @@ public class UserDataConsumer {
 
         WeekCalculationResult result = new WeekCalculationResult(
             user.getChat_id(),
-            weeks,
-            user.getCalculationRequestTime(),
-            LocalDateTime.now()
+            weeks
         );
         resultTemplate.send("week-calculation-results", result);
     }
