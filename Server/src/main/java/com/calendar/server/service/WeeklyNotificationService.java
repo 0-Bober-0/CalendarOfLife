@@ -18,7 +18,7 @@ public class WeeklyNotificationService {
     private final UserRepository userRepository;
     private final ResultProducer resultProducer;
 
-    // Каждый понедельник в 9:00 утра
+    // Каждый понедельник в 12:00 утра
     @Scheduled(cron = "0 0 12 * * MON")
     public void sendWeeklyNotifications() {
         List<User> users = userRepository.findAll();
