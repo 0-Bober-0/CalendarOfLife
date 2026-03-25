@@ -37,7 +37,7 @@ graph LR
 1. Клонируйте репозиторий:
    ```bash
    git clone https://github.com/0-Bober-0/CalendarOfLife
-   cd life-weeks-calendar
+   cd CalendarOfLife
 2. Запустите сервисы:
    ```bash
    docker-compose up -d
