@@ -43,7 +43,6 @@ graph LR
    docker-compose up -d
 3. Приложение будет доступно:
    + Если свободны используемые порты - (2181, 5432, 8081, 8082, 8083, 9000, 9092)
-   + Telegram Bot - ищите @CalendarOf_Life_bot в Telegram
    + Adminer (DB UI) - http://localhost:8081
    + Kafdrop (Kafka UI) - http://localhost:9000
      
